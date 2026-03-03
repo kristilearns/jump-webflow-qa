@@ -1,0 +1,16 @@
+name: Slack Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  send-slack-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Message
+        run: |
+          curl -X POST $SLACK_WEBHOOK_URL \
+          -H "Content-Type: application/json" \
+          -d '{"text":"GitHub successfully triggered Slack 🎉"}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
